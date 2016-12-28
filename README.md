@@ -1,5 +1,5 @@
 # tpg_tweepy
-parse @thepointsguy for deal alerts
+###parse @thepointsguy for deal alerts
 
 prerequisites: 
 
@@ -16,9 +16,9 @@ usage: tpg_dealalerts_clean.py [-h] -c config_file [-e]
 twitter flight deal notifier
 
 optional arguments:
-  -h, --help      show this help message and exit
-  -c config_file  required configuration file for connecting to twitter api
-                  and optionally sending email
-  -e              send email
+  *-h, --help      show this help message and exit
+  *-c config_file  required configuration file for connecting to twitter api
+  *                and optionally sending email
+  *-e              send email
 
 tpg_dealalerts_stream.py is a work in progress and is the obvious evolution of this idea
