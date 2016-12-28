@@ -8,6 +8,7 @@ import csv
 import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
+import pickledb
 
 def arg_parser():
     parser = argparse.ArgumentParser(description = 'twitter flight deal notifier')
@@ -72,6 +73,15 @@ def get_config_item(section, item):
     return ret
 
 def main(screen_name):
+    db = pickledb.load('../test.db', False)
+    
+    db.set('key', 'aksdlfksdf')
+    db.append('key', 'more stuff!')
+    
+    print 'value for key is:', db.get('key')
+    
+    db.dump()
+    
     api = twitter_auth()
     
     new_tweets = api.user_timeline(screen_name = screen_name,count=100)
