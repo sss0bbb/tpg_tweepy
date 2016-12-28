@@ -1,7 +1,9 @@
 # tpg_tweepy
 parse @thepointsguy for deal alerts
 
-fill a configuration file with the format shown in tpg_dealalerts.empty.conf
+prerequisites: 
+1. fill a configuration file with the format shown in tpg_dealalerts.empty.conf
+2. pip install -r requirements.txt
 
 usage: ./tpg_dealalerts_clean.py -c <conf_file>
 
