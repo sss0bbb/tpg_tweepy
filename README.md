@@ -17,8 +17,8 @@ twitter flight deal notifier
 
 optional arguments:
   * -h, --help      show this help message and exit
-  * -c config_file  required configuration file for connecting to twitter api
-  *                and optionally sending email
+  * -c config_file  required configuration file for connecting to twitter api and optionally sending email
   * -e              send email
 
-tpg_dealalerts_stream.py is a work in progress and is the obvious evolution of this idea
+####tpg_dealalerts_clean.py is more of a finished product
+####tpg_dealalerts_stream.py is a work in progress and is the obvious evolution of this idea
