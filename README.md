@@ -11,14 +11,14 @@ prerequisites:
 2. fill a configuration file with the format shown in tpg_dealalerts.empty.conf
 3. pip install -r requirements.txt
 
-usage: tpg_dealalerts_clean.py [-h] -c config_file [-e]
+**usage**: tpg_dealalerts_clean.py [-h] -c config_file [-e]
 
 twitter flight deal notifier
 
 optional arguments:
-  *-h, --help      show this help message and exit
-  *-c config_file  required configuration file for connecting to twitter api
+  * -h, --help      show this help message and exit
+  * -c config_file  required configuration file for connecting to twitter api
   *                and optionally sending email
-  *-e              send email
+  * -e              send email
 
 tpg_dealalerts_stream.py is a work in progress and is the obvious evolution of this idea
