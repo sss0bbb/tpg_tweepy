@@ -9,6 +9,10 @@ import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 
+class MyStreamListener(tweepy.StreamListener):
+    def on_status(self, status):
+        print(status.text)
+
 def arg_parser():
     parser = argparse.ArgumentParser(description = 'twitter flight deal notifier')
     parser.add_argument('-c', dest = 'config', metavar = 'config file')
@@ -75,7 +79,7 @@ def main(screen_name):
     
     api = twitter_auth()
     
-    new_tweets = api.user_timeline(screen_name = screen_name,count=100)
+    new_tweets = api.user_timeline(screen_name = screen_name,count=50)
     
     #parse out tweets not containing special text
     for tweet in new_tweets:
@@ -85,6 +89,10 @@ def main(screen_name):
             if 'hong kong' in tweet.text.lower():
                 print 'hong kong found!'
                 #email_deal(tweet.text)
+                
+    myStreamListener = MyStreamListener()
+    myStream = tweepy.Stream(api, listener=myStreamListener())
+    myStream.filter(track=['python'])
 
 if __name__ == '__main__':
     #pass in the username of the account you want to download
