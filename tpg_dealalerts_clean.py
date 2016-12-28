@@ -11,7 +11,7 @@ from email.mime.multipart import MIMEMultipart
 
 def arg_parser():
     parser = argparse.ArgumentParser(description = 'twitter flight deal notifier')
-    parser.add_argument('-c', dest = 'config', help = 'required configuration file for connecting to twitter api and optionally sending email', metavar = 'config file', required = True)
+    parser.add_argument('-c', dest = 'config', help = 'required configuration file for connecting to twitter api and optionally sending email', metavar = 'config_file', required = True)
     parser.add_argument('-e', action = 'store_true', help = 'send email', default = False, dest = 'email')
     args = parser.parse_args()
     return (args)
