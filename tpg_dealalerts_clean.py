@@ -11,7 +11,8 @@ from email.mime.multipart import MIMEMultipart
 
 def arg_parser():
     parser = argparse.ArgumentParser(description = 'twitter flight deal notifier')
-    parser.add_argument('-c', dest = 'config', metavar = 'config file')
+    parser.add_argument('-c', dest = 'config', help = 'required configuration file for connecting to twitter api and optionally sending email', metavar = 'config file', required = True)
+    parser.add_argument('-e', action = 'store_true', help = 'send email', default = False, dest = 'email')
     args = parser.parse_args()
     return (args)
 
@@ -71,8 +72,6 @@ def get_config_item(section, item):
     return ret
 
 def main(screen_name):
-    
-    
     api = twitter_auth()
     
     new_tweets = api.user_timeline(screen_name = screen_name,count=100)
@@ -84,9 +83,11 @@ def main(screen_name):
             #email_deal(tweet.text)
             if 'hong kong' in tweet.text.lower():
                 print 'hong kong found!'
-                #email_deal(tweet.text)
+                if args.email:
+                    print 'sending email to:', get_config_item('email', 'recipients')
+                    email_deal(tweet.text)
 
 if __name__ == '__main__':
-    #pass in the username of the account you want to download
+    #pass in the username of the account you want to parse
     args = arg_parser()
     main('thepointsguy')
