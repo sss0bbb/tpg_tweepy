@@ -2,6 +2,7 @@
 parse @thepointsguy for deal alerts
 
 prerequisites: 
+
 1. fill a configuration file with the format shown in tpg_dealalerts.empty.conf
 2. pip install -r requirements.txt
 
