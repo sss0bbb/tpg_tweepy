@@ -8,12 +8,23 @@ import csv
 import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
-import pickledb
+import json
 
 def arg_parser():
     parser = argparse.ArgumentParser(description = 'twitter flight deal notifier')
-    parser.add_argument('-c', dest = 'config', help = 'required configuration file for connecting to twitter api and optionally sending email', metavar = 'config_file', required = True)
-    parser.add_argument('-e', action = 'store_true', help = 'send email', default = False, dest = 'email')
+    parser.add_argument('-c', 
+        dest = 'config', 
+        required = True,
+        help = 'required configuration file for connecting to twitter api and optionally sending email')
+    parser.add_argument('-d', 
+        dest = 'db', 
+        help = 'optional python shelve db')
+    parser.add_argument('-e', 
+        action = 'store_true', 
+        default = False, 
+        dest = 'email',
+        help = 'send email')
+    
     args = parser.parse_args()
     return (args)
 
@@ -73,15 +84,9 @@ def get_config_item(section, item):
     return ret
 
 def main(screen_name):
-    db = pickledb.load('../test.db', False)
-    
-    db.set('key', 'aksdlfksdf')
-    db.append('key', 'more stuff!')
-    
-    print 'value for key is:', db.get('key')
-    
-    db.dump()
-    
+    if args.db:
+        print 'db arg is:', args.db
+            
     api = twitter_auth()
     
     new_tweets = api.user_timeline(screen_name = screen_name,count=100)
@@ -93,6 +98,10 @@ def main(screen_name):
             #email_deal(tweet.text)
             if 'hong kong' in tweet.text.lower():
                 print 'hong kong found!'
+                print 'full raw tweet text is:\n', json.dumps(tweet._json, sort_keys = True, indent = 4)
+                if args.db:
+                    with open(args.db, 'w') as db:
+                        json.dump(tweet._json, db)
                 if args.email:
                     print 'sending email to:', get_config_item('email', 'recipients')
                     email_deal(tweet.text)
