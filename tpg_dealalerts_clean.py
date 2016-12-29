@@ -115,14 +115,31 @@ def main(screen_name):
                 print 'nyc or hong kong found!'
                 #print 'full raw tweet text is:\n', json.dumps(tweet._json, sort_keys = True, indent = 4)
                 if args.db:
-                    tweetdb.append(tweet._json)
-                    for tweet in tweetdb:
-                        print tweet['id']
+                    if len(tweetdb) > 0:
+                        if any(item['id'] == tweet.id for item in tweetdb):
+                            print '!!!TWEET ALREADY IN DB!!!'
+                        else:
+                            print 'new tweet! adding it. id:', tweet.id
+                            tweetdb.append(tweet._json)
+                        # for item in tweetdb:
+                        #     #print 'item id is:', item['id']
+                        #     #print 'tweet id is:', tweet.id
+                        #     if item['id'] is tweet.id:
+                        #         print 'tweet previously processed!'
+                        #     else:
+                        #         print 'new tweet! adding it. id:', tweet.id
+                        #         tweetdb.append(tweet._json)
+                    else:
+                        #if dealing with empty database, immediately add tweet
+                        print 'empty database. adding tweet. id:', tweet.id
+                        tweetdb.append(tweet._json)
                 if args.email:
                     print 'sending email to:', get_config_item('email', 'recipients')
                     email_deal(tweet.text)
     with open(args.db, 'w') as db:
         json.dump(tweetdb, db, indent = 4)
+    for item in tweetdb:
+        print item['id']
 
 if __name__ == '__main__':
     #pass in the username of the account you want to parse
