@@ -86,7 +86,9 @@ def get_config_item(section, item):
 def main(screen_name):
     if args.db:
         print 'db arg is:', args.db
-            
+        with open(args.db, 'r') as db:
+            for item in db:
+                print json.dumps(item, sort_keys = True, indent = 4)
     api = twitter_auth()
     
     new_tweets = api.user_timeline(screen_name = screen_name,count=100)
@@ -98,7 +100,7 @@ def main(screen_name):
             #email_deal(tweet.text)
             if 'hong kong' in tweet.text.lower():
                 print 'hong kong found!'
-                print 'full raw tweet text is:\n', json.dumps(tweet._json, sort_keys = True, indent = 4)
+                #print 'full raw tweet text is:\n', json.dumps(tweet._json, sort_keys = True, indent = 4)
                 if args.db:
                     with open(args.db, 'w') as db:
                         json.dump(tweet._json, db)
