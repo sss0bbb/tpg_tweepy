@@ -104,7 +104,7 @@ def process_tweetdb(tweetdb, tweet):
     if args.db:
         if len(tweetdb) > 0:
             if any(item['id'] == tweet.id for item in tweetdb):
-                print '!!!TWEET ALREADY IN DB!!!'
+                print 'tweet has been previously processed:', tweet.id
             else:
                 print 'new tweet! adding it. id:', tweet.id
                 tweetdb.append(tweet._json)
