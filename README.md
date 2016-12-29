@@ -12,7 +12,7 @@ prerequisites:
 2. fill a configuration file with the format shown in tpg_dealalerts.sample.conf
 3. pip install -r requirements.txt
 
-**usage**: tpg_dealalerts_clean.py [-h] -c config_file [-e]
+**usage**: tpg_dealalerts_clean.py [-h] -c config_file -d db_file [-e]
 
 twitter flight deal notifier
 
