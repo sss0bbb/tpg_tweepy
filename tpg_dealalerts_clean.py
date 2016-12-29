@@ -84,11 +84,24 @@ def get_config_item(section, item):
     return ret
 
 def main(screen_name):
+    #initialize list to hold tweets as dicts
+    tweetdb = []
+    
     if args.db:
+        #check to see if file already exists
         print 'db arg is:', args.db
-        with open(args.db, 'r') as db:
-            for item in db:
-                print json.dumps(item, sort_keys = True, indent = 4)
+        if os.path.isfile(args.db):
+            with open(args.db, 'r') as db:
+                #load tweets as a list of dictionaries
+                tweetdb = json.load(db)
+                print tweetdb
+                for tweet in tweetdb:
+                    print type(tweet)
+                    print tweet['id']
+                    print sorted(tweet.keys())
+        else:
+            print args.db, 'is empty.'
+                
     api = twitter_auth()
     
     new_tweets = api.user_timeline(screen_name = screen_name,count=100)
@@ -98,15 +111,18 @@ def main(screen_name):
         if text_parse(tweet.text):
             print 'deal found!\n', 'created:', tweet.created_at, '\n', tweet.text, '\n'
             #email_deal(tweet.text)
-            if 'hong kong' in tweet.text.lower():
-                print 'hong kong found!'
+            if 'nyc' in tweet.text.lower() or 'hong kong' in tweet.text.lower():
+                print 'nyc or hong kong found!'
                 #print 'full raw tweet text is:\n', json.dumps(tweet._json, sort_keys = True, indent = 4)
                 if args.db:
-                    with open(args.db, 'w') as db:
-                        json.dump(tweet._json, db)
+                    tweetdb.append(tweet._json)
+                    for tweet in tweetdb:
+                        print tweet['id']
                 if args.email:
                     print 'sending email to:', get_config_item('email', 'recipients')
                     email_deal(tweet.text)
+    with open(args.db, 'w') as db:
+        json.dump(tweetdb, db, indent = 4)
 
 if __name__ == '__main__':
     #pass in the username of the account you want to parse
