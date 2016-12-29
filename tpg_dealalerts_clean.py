@@ -18,12 +18,12 @@ def arg_parser():
         help = 'required configuration file for connecting to twitter api and optionally sending email')
     parser.add_argument('-d', 
         dest = 'db', 
-        help = 'optional python shelve db')
+        help = 'json db file (optional)')
     parser.add_argument('-e', 
         action = 'store_true', 
         default = False, 
         dest = 'email',
-        help = 'send email')
+        help = 'send email (optional)')
     
     args = parser.parse_args()
     return (args)
