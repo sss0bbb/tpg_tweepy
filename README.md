@@ -1,6 +1,6 @@
 # tpg_tweepy
 ###parse @thepointsguy for deal alerts
-###I would be very surprised if there aren't 1000 things that do this already. Much of this is for personal practice in learning what's exposed by tweepy
+###I would be very surprised if there aren't 1000 things that do this already. Much of this is for personal practice working with tweepy and storing tweets to file as json
 
 prerequisites: 
 
