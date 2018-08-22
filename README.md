@@ -1,6 +1,6 @@
 # tpg_tweepy
-###parse @thepointsguy for deal alerts
-###I would be very surprised if there aren't 1000 things that do this already. Much of this is for personal practice working with tweepy and storing tweets to file as json
+### parse @thepointsguy for deal alerts
+### I would be very surprised if there aren't 1000 things that do this already. Much of this is for personal practice working with tweepy and storing tweets to file as json
 
 prerequisites: 
 
@@ -23,5 +23,5 @@ optional arguments:
   * -d DB       json db file (optional)
   * -e          send email (optional)
 
-####tpg_dealalerts_clean.py is more of a finished product
-####tpg_dealalerts_stream.py is a work in progress and is the obvious evolution of this idea
+#### tpg_dealalerts_clean.py is more of a finished product
+#### tpg_dealalerts_stream.py is a work in progress and is the obvious evolution of this idea
